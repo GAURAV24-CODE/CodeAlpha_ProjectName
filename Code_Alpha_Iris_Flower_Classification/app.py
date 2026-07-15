@@ -94,7 +94,6 @@ def load_model_and_scaler():
 
     return model, scaler
 
-
 @st.cache_data(show_spinner=False)
 def load_dataset():
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
