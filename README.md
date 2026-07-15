@@ -174,7 +174,7 @@ These projects were completed as part of the **CodeAlpha Data Science Internship
 
 💻 Aspiring Data Scientist
 
-📧 Email: *your-email@example.com*
+📧 Email: *kumnhargaurav24@gmail.com*
 
 🔗 LinkedIn: https://www.linkedin.com/in/gaurav-kumbhar-0b4a39293
 
