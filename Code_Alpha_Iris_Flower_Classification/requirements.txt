@@ -1,7 +1,8 @@
-streamlit
-pandas
-numpy
-plotly
-scikit-learn
-matplotlib
-scipy
+streamlit>=1.40
+pandas>=2.2
+numpy>=1.26
+plotly>=5.24
+scikit-learn>=1.5
+matplotlib>=3.9
+scipy>=1.14
+joblib>=1.4
