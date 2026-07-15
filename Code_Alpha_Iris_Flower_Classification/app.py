@@ -99,9 +99,6 @@ def load_model_and_scaler():
 def load_dataset():
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     data_path = os.path.join(BASE_DIR, "data", "Iris.csv")
-    st.write("BASE_DIR:", BASE_DIR)
-    st.write("DATA PATH:", data_path)
-    st.write("Exists:", os.path.exists(data_path))
     return pd.read_csv(data_path)
 
 
