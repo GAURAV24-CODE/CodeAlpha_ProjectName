@@ -435,137 +435,67 @@ elif page == "📊 Dataset":
 
 # ==========================================================
 # ==========================================================
+# ======================================================
+# About Me
+# ======================================================
 
-elif page == "ℹ️ About":
+st.markdown("---")
+st.subheader("👨‍💻 About Me")
 
-    from pathlib import Path
+left, right = st.columns([1, 2], gap="large")
 
-    st.markdown("# ℹ️ About This Project")
-    st.markdown("---")
+with left:
 
-    # ======================================================
-    # Top Section
-    # ======================================================
+    image_path = Path(__file__).parent / "assets" / "gaurav.png"
 
-    left, right = st.columns([3, 1], gap="large")
+    if image_path.exists():
+        st.image(image_path, width=250)
 
-    with left:
+with right:
 
-        st.subheader("🌸 Iris Flower Classification")
+    st.markdown("## Gaurav Eknath Kumbhar")
 
-        st.write("""
-This project predicts the species of an Iris flower using Machine Learning.
-
-The application demonstrates a complete Machine Learning workflow including
-data preprocessing, exploratory data analysis, model training, evaluation,
-and real-time prediction using a Random Forest Classifier.
-""")
-
-        st.subheader("🤖 Machine Learning Model")
-
-        st.success("Random Forest Classifier")
-
-        st.subheader("✨ Key Features")
-
-        c1, c2 = st.columns(2)
-
-        with c1:
-            st.markdown("""
-✅ Real-time Iris Prediction
-
-✅ Dataset Explorer
-
-✅ Interactive Charts
-
-✅ Feature Analysis
-
-✅ Correlation Heatmap
-""")
-
-        with c2:
-            st.markdown("""
-✅ Random Forest Model
-
-✅ High Accuracy
-
-✅ Fast Prediction
-
-✅ Modern Streamlit UI
-
-✅ Responsive Design
-""")
-
-    with right:
-
-        image_path = Path(__file__).parent / "assets" / "gaurav.png"
-
-        if image_path.exists():
-            st.image(str(image_path), width=230)
-
-        st.markdown("## Gaurav Eknath Kumbhar")
-
-        st.caption("🚀 Data Science • Machine Learning • AI")
-
-        st.markdown("---")
-
-        st.subheader("🛠️ Tech Stack")
-
-        st.markdown("""
-🐍 **Python**
-
-📊 **Pandas**
-
-🔢 **NumPy**
-
-🤖 **Scikit-learn**
-
-📈 **Plotly**
-
-🎈 **Streamlit**
-
-🧠 **Machine Learning**
-""")
-
-    # ======================================================
-    # About Me
-    # ======================================================
-
-    st.markdown("---")
-
-    st.subheader("👨‍💻 About Me")
+    st.caption("🚀 MCA Student | Data Science & Machine Learning Enthusiast")
 
     st.write("""
-Hello! I'm **Gaurav Eknath Kumbhar**, an MCA student passionate about
-**Data Science, Machine Learning, Artificial Intelligence, Data Analytics,
-Python Development, SQL, and Power BI**.
+I am an enthusiastic **MCA student** passionate about transforming data into
+meaningful insights using **Data Science, Machine Learning, Artificial Intelligence,
+Python, SQL, Power BI, and Streamlit**.
 
-I enjoy building real-world Machine Learning applications,
-creating interactive dashboards, and deploying professional
-Streamlit projects.
+I enjoy solving real-world problems through intelligent applications and
+continuously improving my technical skills by building end-to-end projects.
 
-My goal is to become a skilled Data Scientist by continuously
-learning, building practical projects, and solving real-world problems.
+My current focus is on:
+
+- 🤖 Machine Learning
+- 📊 Data Analytics
+- 🐍 Python Development
+- 📈 Power BI Dashboards
+- 🗄 SQL & Databases
+- 🎈 Streamlit Web Applications
+
+I aim to become a professional **Data Scientist** by building impactful
+projects and contributing to innovative AI solutions.
 """)
 
     st.markdown("### 🌐 Connect With Me")
 
-    col1, col2 = st.columns(2)
+    c1, c2 = st.columns(2)
 
-    with col1:
+    with c1:
         st.link_button(
             "💼 LinkedIn",
             "https://www.linkedin.com/in/gaurav-kumbhar-0b4a39293"
         )
 
-    with col2:
+    with c2:
         st.link_button(
             "🐙 GitHub",
             "https://github.com/GAURAV24-CODE"
         )
 
-    st.markdown("---")
+st.markdown("---")
 
-    st.success("⭐ Thank you for visiting this project!")
+st.success("⭐ Thank you for visiting this project!")
 
-    st.caption("Built with ❤️ using Streamlit by Gaurav Eknath Kumbhar")
-# ==========================================================
+st.caption("Built with ❤️ using Streamlit by Gaurav Eknath Kumbhar")
