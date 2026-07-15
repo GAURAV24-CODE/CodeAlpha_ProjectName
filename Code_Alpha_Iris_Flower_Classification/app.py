@@ -294,7 +294,6 @@ elif page == "🌸 Prediction":
 # ==========================================================
 # DATASET PAGE
 # ==========================================================
-
 elif page == "📊 Dataset":
 
     st.markdown('<p class="main-header">📊 Iris Dataset</p>', unsafe_allow_html=True)
@@ -312,8 +311,12 @@ elif page == "📊 Dataset":
 
         tab1, tab2, tab3 = st.tabs(["🔍 Overview", "📈 Charts", "📌 Data Quality"])
 
+        # ===========================
+        # Tab 1
+        # ===========================
         with tab1:
             c1, c2, c3 = st.columns(3)
+
             c1.metric("Rows", df.shape[0])
             c2.metric("Columns", df.shape[1])
             c3.metric("Species", df[species_col].nunique() if species_col else "—")
@@ -324,53 +327,97 @@ elif page == "📊 Dataset":
             st.subheader("Statistical Summary")
             st.dataframe(df.describe(), use_container_width=True)
 
+        # ===========================
+        # Tab 2
+        # ===========================
         with tab2:
+
             numeric_cols = df.select_dtypes(include=np.number).columns.tolist()
 
             if species_col:
+
                 st.subheader("Feature Distribution by Species")
-                feature = st.selectbox("Choose a feature", numeric_cols, key="hist_feature")
+
+                feature = st.selectbox(
+                    "Choose a feature",
+                    numeric_cols,
+                    key="hist_feature"
+                )
+
                 hist_fig = px.histogram(
-                    df, x=feature, color=species_col, barmode="overlay",
-                    opacity=0.7, nbins=25,
+                    df,
+                    x=feature,
+                    color=species_col,
+                    barmode="overlay",
+                    opacity=0.7,
+                    nbins=25,
                     color_discrete_sequence=["#C2185B", "#F06292", "#F8BBD0"]
                 )
+
                 hist_fig.update_layout(height=380)
                 st.plotly_chart(hist_fig, use_container_width=True)
 
                 st.subheader("Feature Relationships")
+
                 sc1, sc2 = st.columns(2)
+
                 with sc1:
-                    x_axis = st.selectbox("X-axis", numeric_cols, index=0)
+                    x_axis = st.selectbox("X-axis", numeric_cols)
+
                 with sc2:
-                    y_axis = st.selectbox("Y-axis", numeric_cols, index=min(2, len(numeric_cols) - 1))
+                    y_axis = st.selectbox(
+                        "Y-axis",
+                        numeric_cols,
+                        index=min(2, len(numeric_cols)-1)
+                    )
+
                 scatter_fig = px.scatter(
-                    df, x=x_axis, y=y_axis, color=species_col,
-                    color_discrete_sequence=["#C2185B", "#F06292", "#F8BBD0"],
-                    hover_data=numeric_cols
+                    df,
+                    x=x_axis,
+                    y=y_axis,
+                    color=species_col,
+                    hover_data=numeric_cols,
+                    color_discrete_sequence=["#C2185B", "#F06292", "#F8BBD0"]
                 )
+
                 scatter_fig.update_layout(height=420)
                 st.plotly_chart(scatter_fig, use_container_width=True)
 
                 st.subheader("All Features at a Glance")
+
                 matrix_fig = px.scatter_matrix(
-                    df, dimensions=numeric_cols, color=species_col,
+                    df,
+                    dimensions=numeric_cols,
+                    color=species_col,
                     color_discrete_sequence=["#C2185B", "#F06292", "#F8BBD0"]
                 )
+
                 matrix_fig.update_layout(height=650)
                 st.plotly_chart(matrix_fig, use_container_width=True)
+
             else:
-                st.info("No species/class column detected for grouped charts.")
+                st.info("No species/class column detected.")
 
             st.subheader("Correlation Heatmap")
+
             corr = df[numeric_cols].corr()
+
             heat_fig = px.imshow(
-                corr, text_auto=".2f", color_continuous_scale="RdPu",
+                corr,
+                text_auto=".2f",
+                color_continuous_scale="RdPu",
                 aspect="auto"
             )
+
             heat_fig.update_layout(height=420)
+
             st.plotly_chart(heat_fig, use_container_width=True)
+
+        # ===========================
+        # Tab 3
+        # ===========================
         with tab3:
+
             st.subheader("Column Names")
             st.write(list(df.columns))
 
@@ -380,8 +427,12 @@ elif page == "📊 Dataset":
             st.subheader("Data Types")
             st.dataframe(df.dtypes.astype(str).to_frame("Data Type"))
 
-except FileNotFoundError as e:
-    st.error(f"Error: {e}")
+    except FileNotFoundError as e:
+        st.error(f"❌ {e}")
+
+    except Exception as e:
+        st.error(f"❌ Unexpected Error: {e}")
+
 # ==========================================================
 # ==========================================================
 # ABOUT PAGE
