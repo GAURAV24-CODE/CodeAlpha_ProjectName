@@ -435,350 +435,93 @@ elif page == "📊 Dataset":
 
 # ==========================================================
 # ==========================================================
-# ABOUT PAGE
-# ==========================================================
+
+
 
 elif page == "ℹ️ About":
 
-    st.markdown('<p class="main-header">ℹ️ About This Project</p>', unsafe_allow_html=True)
+    from pathlib import Path
+
+    st.markdown("# ℹ️ About This Project")
     st.markdown("---")
 
-    left, right = st.columns([1.4, 1])
+    col1, col2 = st.columns([2, 1])
 
-    with left:
+    with col1:
         st.subheader("🌸 Iris Flower Classification")
 
         st.write("""
-        This project predicts the species of an Iris flower using Machine Learning.
-        It is trained on the classic Iris dataset, first introduced by biologist
-        Ronald Fisher in 1936, which remains one of the most widely used datasets
-        for classification tasks in data science education.
-        """)
+This project predicts the species of an Iris flower using Machine Learning.
 
-        st.subheader("🤖 Algorithm")
+It is trained on the classic Iris dataset introduced by Ronald Fisher in 1936 and demonstrates a complete machine learning workflow including data preprocessing, model training, evaluation, and prediction.
+""")
 
-        st.markdown("""
-        **Random Forest Classifier**
-
-        Random Forest is an ensemble learning algorithm that combines multiple
-        decision trees to improve prediction accuracy and reduce overfitting.
-        """)
+        st.subheader("🤖 Model")
+        st.info("Random Forest Classifier")
 
         st.subheader("✨ Features")
 
         st.markdown("""
-        - 🌸 Real-time Iris flower prediction
-        - 📊 Interactive dataset visualization
-        - 📈 Prediction confidence chart
-        - 🎨 Modern and responsive Streamlit UI
-        - 🤖 Random Forest Machine Learning Model
-        - ⚡ Fast predictions
-        """)
+- 🌸 Real-time Iris Prediction
+- 📊 Interactive Dataset Explorer
+- 📈 Interactive Charts
+- 🤖 Random Forest Model
+- ⚡ Fast Predictions
+- 🎨 Modern Streamlit UI
+""")
 
-    with right:
+    with col2:
 
-        st.subheader("🛠️ Tech Stack")
+        image_path = Path(__file__).parent / "assets" / "gaurav.png"
+
+        if image_path.exists():
+            st.image(str(image_path), width=220)
+
+        st.markdown("## Gaurav Eknath Kumbhar")
+
+        st.caption("🚀 Data Science • Machine Learning • AI")
+
+        st.markdown("### 🛠 Tech Stack")
 
         st.markdown("""
-        - 🐍 Python
-        - 📊 Pandas
-        - 🔢 NumPy
-        - 🤖 Scikit-learn
-        - 🎈 Streamlit
-        - 📈 Plotly
-        """)
+- 🐍 Python
+- 📊 Pandas
+- 🔢 NumPy
+- 🤖 Scikit-learn
+- 🎈 Streamlit
+- 📈 Plotly
+""")
 
-        st.markdown("---")
-   
- 
+    st.markdown("---")
+
+    st.subheader("👨‍💻 About Me")
+
+    st.write("""
+I am an MCA student passionate about Data Science, Machine Learning,
+Artificial Intelligence, Data Analytics and Python development.
+
+I enjoy building real-world ML applications and continuously improving
+my technical skills through practical projects.
+""")
+
+    c1, c2 = st.columns(2)
+
+    with c1:
+        st.link_button(
+            "💼 LinkedIn",
+            "https://www.linkedin.com/in/gaurav-kumbhar-0b4a39293"
+        )
+
+    with c2:
+        st.link_button(
+            "🐙 GitHub",
+            "https://github.com/GAURAV24-CODE"
+        )
+
     st.markdown("---")
 
     st.success("⭐ Thank you for visiting this project!")
 
     st.caption("Built with ❤️ using Streamlit by Gaurav Eknath Kumbhar")
-
-
-    image_path = "gaurav.png"
-    
-    with open(image_path, "rb") as image_file:
-        img = base64.b64encode(image_file.read()).decode()
-    
-    image_type = os.path.splitext(image_path)[1][1:]
-    
-    # ------------------------------
-    # Premium Hero Section
-    # ------------------------------
-    st.markdown(f"""
-    <style>
-    
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
-    
-    html, body, [class*="css"] {{
-        font-family: 'Poppins', sans-serif;
-    }}
-    
-    @keyframes float {{
-        0% {{transform: translateY(0px);}}
-        50% {{transform: translateY(-12px);}}
-        100% {{transform: translateY(0px);}}
-    }}
-    
-    @keyframes glow {{
-        0% {{
-            box-shadow:0 0 25px rgba(59,130,246,.35);
-        }}
-        50% {{
-            box-shadow:0 0 55px rgba(96,165,250,.95);
-        }}
-        100% {{
-            box-shadow:0 0 25px rgba(59,130,246,.35);
-        }}
-    }}
-    
-    @keyframes gradient {{
-        0% {{background-position:0% 50%;}}
-        50% {{background-position:100% 50%;}}
-        100% {{background-position:0% 50%;}}
-    }}
-    
-    @keyframes fade {{
-        from {{
-            opacity:0;
-            transform:translateY(40px);
-        }}
-        to {{
-            opacity:1;
-            transform:translateY(0px);
-        }}
-    }}
-    
-    .hero-card{{
-        max-width:1800px;
-        margin:auto;
-        padding:80px 80px;
-        border-radius:30px;
-        text-align:center;
-    
-        background:linear-gradient(-45deg,
-        #020617,
-        #0F172A,
-        #111827,
-        #1E293B);
-    
-        background-size:400% 400%;
-    
-        animation:
-            gradient 12s ease infinite,
-            fade 1s ease;
-    
-        border:1px solid rgba(96,165,250,.18);
-    
-        box-shadow:
-            0px 30px 70px rgba(0,0,0,.55);
-    }}
-    
-    .profile{{
-        width:180px;
-        height:180px;
-        border-radius:50%;
-        object-fit:cover;
-    
-        border:6px solid #3B82F6;
-    
-        animation:
-            float 4s ease-in-out infinite,
-            glow 3s infinite;
-    
-        transition:.4s;
-    }}
-    
-    .profile:hover{{
-        transform:scale(1.08);
-    }}
-    
-    .name{{
-        margin-top:28px;
-        margin-bottom:12px;
-    
-        font-size:48px;
-        font-weight:800;
-    
-        background:linear-gradient(
-            90deg,
-            #FFFFFF,
-            #60A5FA,
-            #38BDF8,
-            #FFFFFF
-        );
-    
-        background-size:300%;
-    
-        -webkit-background-clip:text;
-        -webkit-text-fill-color:transparent;
-    
-        animation:gradient 7s linear infinite;
-    }}
-    
-    .role{{
-        color:#38BDF8;
-        font-size:24px;
-        font-weight:600;
-    }}
-    
-    .desc{{
-        color:#CBD5E1;
-        font-size:18px;
-        line-height:1.9;
-        max-width:760px;
-        margin:auto;
-        margin-top:25px;
-    }}
-    
-    .btn{{
-        display:inline-block;
-    
-        margin:12px;
-    
-        padding:16px 34px;
-    
-        border-radius:14px;
-    
-        text-decoration:none;
-    
-        color:white;
-    
-        font-weight:700;
-    
-        font-size:18px;
-    
-        transition:.35s;
-    }}
-    
-    .linkedin{{
-      background:linear-gradient(90deg,#2563EB,#7C3AED);
-       
-    }}
-    
-    .github{{
-      background:linear-gradient(90deg,#DC2626,#EF4444);
-    }}
-    
-    .btn:hover{{
-        transform:translateY(-6px) scale(1.05);
-    
-        box-shadow:
-            0px 15px 35px rgba(37,99,235,.55);
-    }}
-    
-    .skills{{
-        display:flex;
-        justify-content:center;
-        gap:35px;
-        flex-wrap:wrap;
-        margin-top:40px;
-    }}
-    
-    .skill{{
-        padding:15px 22px;
-    
-        border-radius:14px;
-    
-        background:rgba(255,255,255,.05);
-    
-        color:white;
-    
-        border:1px solid rgba(255,255,255,.08);
-    
-        font-size:17px;
-    
-        transition:.3s;
-    }}
-    
-    .skill:hover{{
-        background:#2563EB;
-        transform:translateY(-5px);
-    }}
-    
-    .mail{{
-        margin-top:35px;
-        color:#E2E8F0;
-        font-size:18px;
-    }}
-    
-    .mail a{{
-        color:#93C5FD;
-        text-decoration:none;
-    }}
-    
-    </style>
-    
-    <div class="hero-card">
-    
-    <img class="profile"
-    src="data:image/{image_type};base64,{img}">
-    
-    <div class="name">
-    Gaurav Eknath Kumbhar
-    </div>
-    
-    <div class="role">
-    🚀 Data Science • Machine Learning • AI Enthusiast
-    </div>
-    
-    <div class="desc">
-    Passionate MCA student focused on building intelligent applications using
-    <b>Python</b>,
-    <b>SQL</b>,
-    <b>Machine Learning</b>,
-    <b>Power BI</b>,
-    <b>Data Analytics</b>,
-    and
-    <b>Artificial Intelligence</b>.
-    Always learning, always building.
-    </div>
-    
-    <div style="margin-top:35px;">
-    
-    <a class="btn linkedin"
-    href="https://www.linkedin.com/in/gaurav-kumbhar-0b4a39293"
-    target="_blank">
-    💼 LinkedIn
-    </a>
-    
-    <a class="btn github"
-    href="https://github.com/GAURAV24-CODE"
-    target="_blank">
-    🐙 GitHub
-    </a>
-    
-    </div>
-    
-    <div class="skills">
-    
-    <div class="skill">🐍 Python</div>
-    
-    <div class="skill">📊 Power BI</div>
-    
-    <div class="skill">🗄 SQL</div>
-    
-    <div class="skill">🤖 Machine Learning</div>
-    
-    <div class="skill">📈 Data Analytics</div>
-    
-    <div class="skill">🧠 AI</div>
-    
-    </div>
-    
-    <div class="mail">
-    
-    📧
-    <a href="mailto:kumbhargaurav24@gmail.com">
-    kumbhargaurav24@gmail.com
-    </a>
-    
-    </div>
-    
-    </div>
-    
-    """, unsafe_allow_html=True)
-    
+# ABOUT PAGE
+# ==========================================================
