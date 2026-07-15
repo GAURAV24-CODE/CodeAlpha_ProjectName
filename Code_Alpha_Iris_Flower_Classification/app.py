@@ -436,8 +436,6 @@ elif page == "📊 Dataset":
 # ==========================================================
 # ==========================================================
 
-
-
 elif page == "ℹ️ About":
 
     from pathlib import Path
@@ -445,74 +443,121 @@ elif page == "ℹ️ About":
     st.markdown("# ℹ️ About This Project")
     st.markdown("---")
 
-    col1, col2 = st.columns([2, 1])
+    # ======================================================
+    # Top Section
+    # ======================================================
 
-    with col1:
+    left, right = st.columns([3, 1], gap="large")
+
+    with left:
+
         st.subheader("🌸 Iris Flower Classification")
 
         st.write("""
 This project predicts the species of an Iris flower using Machine Learning.
 
-It is trained on the classic Iris dataset introduced by Ronald Fisher in 1936 and demonstrates a complete machine learning workflow including data preprocessing, model training, evaluation, and prediction.
+The application demonstrates a complete Machine Learning workflow including
+data preprocessing, exploratory data analysis, model training, evaluation,
+and real-time prediction using a Random Forest Classifier.
 """)
 
-        st.subheader("🤖 Model")
-        st.info("Random Forest Classifier")
+        st.subheader("🤖 Machine Learning Model")
 
-        st.subheader("✨ Features")
+        st.success("Random Forest Classifier")
 
-        st.markdown("""
-- 🌸 Real-time Iris Prediction
-- 📊 Interactive Dataset Explorer
-- 📈 Interactive Charts
-- 🤖 Random Forest Model
-- ⚡ Fast Predictions
-- 🎨 Modern Streamlit UI
+        st.subheader("✨ Key Features")
+
+        c1, c2 = st.columns(2)
+
+        with c1:
+            st.markdown("""
+✅ Real-time Iris Prediction
+
+✅ Dataset Explorer
+
+✅ Interactive Charts
+
+✅ Feature Analysis
+
+✅ Correlation Heatmap
 """)
 
-    with col2:
+        with c2:
+            st.markdown("""
+✅ Random Forest Model
+
+✅ High Accuracy
+
+✅ Fast Prediction
+
+✅ Modern Streamlit UI
+
+✅ Responsive Design
+""")
+
+    with right:
 
         image_path = Path(__file__).parent / "assets" / "gaurav.png"
 
         if image_path.exists():
-            st.image(str(image_path), width=220)
+            st.image(str(image_path), width=230)
 
         st.markdown("## Gaurav Eknath Kumbhar")
 
         st.caption("🚀 Data Science • Machine Learning • AI")
 
-        st.markdown("### 🛠 Tech Stack")
+        st.markdown("---")
+
+        st.subheader("🛠️ Tech Stack")
 
         st.markdown("""
-- 🐍 Python
-- 📊 Pandas
-- 🔢 NumPy
-- 🤖 Scikit-learn
-- 🎈 Streamlit
-- 📈 Plotly
+🐍 **Python**
+
+📊 **Pandas**
+
+🔢 **NumPy**
+
+🤖 **Scikit-learn**
+
+📈 **Plotly**
+
+🎈 **Streamlit**
+
+🧠 **Machine Learning**
 """)
+
+    # ======================================================
+    # About Me
+    # ======================================================
 
     st.markdown("---")
 
     st.subheader("👨‍💻 About Me")
 
     st.write("""
-I am an MCA student passionate about Data Science, Machine Learning,
-Artificial Intelligence, Data Analytics and Python development.
+Hello! I'm **Gaurav Eknath Kumbhar**, an MCA student passionate about
+**Data Science, Machine Learning, Artificial Intelligence, Data Analytics,
+Python Development, SQL, and Power BI**.
 
-I enjoy building real-world ML applications and continuously improving
-my technical skills through practical projects.
+I enjoy building real-world Machine Learning applications,
+creating interactive dashboards, and deploying professional
+Streamlit projects.
+
+My goal is to become a skilled Data Scientist by continuously
+learning, building practical projects, and solving real-world problems.
 """)
 
-    c1, c2 = st.columns(2)
+    st.markdown("### 🌐 Connect With Me")
 
-    with c1:
+    col1, col2 = st.columns(2)
+
+    with col1:
         st.link_button(
             "💼 LinkedIn",
             "https://www.linkedin.com/in/gaurav-kumbhar-0b4a39293"
         )
 
-    with c2:
+    with col2:
         st.link_button(
             "🐙 GitHub",
             "https://github.com/GAURAV24-CODE"
@@ -523,5 +568,4 @@ my technical skills through practical projects.
     st.success("⭐ Thank you for visiting this project!")
 
     st.caption("Built with ❤️ using Streamlit by Gaurav Eknath Kumbhar")
-# ABOUT PAGE
 # ==========================================================
