@@ -474,7 +474,7 @@ The application demonstrates a complete machine learning workflow including:
     # About Me
     # ============================
 
-    left, right = st.columns([1, 2], gap="large")
+    left, right = st.columns([2, 3], gap="large")
 
     with left:
 
