@@ -216,9 +216,9 @@ Through this project, I gained practical experience in:
 
 Aspiring Data Scientist | Python | Machine Learning | Data Analytics | Power BI
 
-GitHub: https://github.com/yourusername
+GitHub: https://github.com/GAURAV24-CODE
 
-LinkedIn: https://linkedin.com/in/yourprofile
+LinkedIn: https://www.linkedin.com/in/gaurav-kumbhar-0b4a39293
 
 ---
 
