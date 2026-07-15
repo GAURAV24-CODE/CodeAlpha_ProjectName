@@ -6,6 +6,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import base64
 import os
+from pathlib import Path
 
 # -------------------------------
 # Page Configuration
@@ -438,64 +439,95 @@ elif page == "📊 Dataset":
 # ======================================================
 # About Me
 # ======================================================
+elif page == "ℹ️ About":
 
-st.markdown("---")
-st.subheader("👨‍💻 About Me")
+    from pathlib import Path
 
-left, right = st.columns([1, 2], gap="large")
+    st.markdown("# ℹ️ About This Project")
+    st.markdown("---")
 
-with left:
+    # ============================
+    # Project Overview
+    # ============================
 
-    image_path = Path(__file__).parent / "assets" / "gaurav.png"
-
-    if image_path.exists():
-        st.image(image_path, width=250)
-
-with right:
-
-    st.markdown("## Gaurav Eknath Kumbhar")
-
-    st.caption("🚀 MCA Student | Data Science & Machine Learning Enthusiast")
+    st.subheader("🌸 Iris Flower Classification")
 
     st.write("""
-I am an enthusiastic **MCA student** passionate about transforming data into
-meaningful insights using **Data Science, Machine Learning, Artificial Intelligence,
-Python, SQL, Power BI, and Streamlit**.
+This project predicts the species of an Iris flower using a Machine Learning model.
 
-I enjoy solving real-world problems through intelligent applications and
-continuously improving my technical skills by building end-to-end projects.
+The application demonstrates a complete machine learning workflow including:
 
-My current focus is on:
-
-- 🤖 Machine Learning
-- 📊 Data Analytics
-- 🐍 Python Development
-- 📈 Power BI Dashboards
-- 🗄 SQL & Databases
-- 🎈 Streamlit Web Applications
-
-I aim to become a professional **Data Scientist** by building impactful
-projects and contributing to innovative AI solutions.
+• Data Collection
+• Data Preprocessing
+• Exploratory Data Analysis (EDA)
+• Model Training
+• Model Evaluation
+• Real-Time Prediction
+• Interactive Streamlit Dashboard
 """)
 
-    st.markdown("### 🌐 Connect With Me")
+    st.success("🤖 Machine Learning Model: Random Forest Classifier")
 
-    c1, c2 = st.columns(2)
+    st.markdown("---")
 
-    with c1:
-        st.link_button(
-            "💼 LinkedIn",
-            "https://www.linkedin.com/in/gaurav-kumbhar-0b4a39293"
-        )
+    # ============================
+    # About Me
+    # ============================
 
-    with c2:
-        st.link_button(
-            "🐙 GitHub",
-            "https://github.com/GAURAV24-CODE"
-        )
+    left, right = st.columns([1, 2], gap="large")
 
-st.markdown("---")
+    with left:
 
-st.success("⭐ Thank you for visiting this project!")
+        image_path = Path(__file__).parent / "assets" / "gaurav.png"
 
-st.caption("Built with ❤️ using Streamlit by Gaurav Eknath Kumbhar")
+        if image_path.exists():
+            st.image(str(image_path), width=240)
+        else:
+            st.info("📷 Add 'gaurav.png' inside the assets folder.")
+
+    with right:
+
+        st.markdown("## Gaurav Eknath Kumbhar")
+
+        st.caption("🎓 MCA Student | Data Science & Machine Learning Enthusiast")
+
+        st.write("""
+I am passionate about **Data Science, Machine Learning, Artificial Intelligence,
+Python, SQL, Power BI, and Streamlit**.
+
+I enjoy solving real-world problems by building intelligent applications and
+interactive dashboards.
+
+My goal is to become a professional **Data Scientist** by continuously learning,
+building practical projects, and improving my technical skills.
+""")
+
+        st.markdown("### 🛠️ Skills")
+
+        c1, c2, c3 = st.columns(3)
+
+        c1.metric("Languages", "Python")
+        c2.metric("ML", "Scikit-Learn")
+        c3.metric("Web", "Streamlit")
+
+        st.markdown("### 🌐 Connect With Me")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.link_button(
+                "💼 LinkedIn",
+                "https://www.linkedin.com/in/gaurav-kumbhar-0b4a39293"
+            )
+
+        with col2:
+            st.link_button(
+                "🐙 GitHub",
+                "https://github.com/GAURAV24-CODE"
+            )
+
+    st.markdown("---")
+
+    st.success("⭐ Thank you for visiting my project!")
+
+    st.caption("Built with ❤️ using Python, Streamlit & Machine Learning")
