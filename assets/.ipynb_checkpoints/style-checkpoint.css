@@ -1,0 +1,33 @@
+/* App Background */
+.stApp {
+    background-color: #F8FAFC !important;
+    color: #1E293B !important;
+}
+
+.block-container {
+    background-color: #F8FAFC !important;
+}
+
+/* Main Content */
+.main {
+    background-color: #F8FAFC !important;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background: #FFFFFF !important;
+}
+
+section[data-testid="stSidebar"] * {
+    color: #1E293B !important;
+}
+
+/* Headings */
+h1,h2,h3,h4,h5,h6{
+    color:#1E293B !important;
+}
+
+/* Text */
+p,span,label,div{
+    color:#334155 !important;
+}
