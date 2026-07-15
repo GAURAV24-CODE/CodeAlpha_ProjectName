@@ -2,9 +2,16 @@
 # Data Loader
 # ==========================================================
 
+from pathlib import Path
 import pandas as pd
 import streamlit as st
 
+# ==========================================================
+# Base Directory
+# ==========================================================
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = BASE_DIR / "data"
 
 # ==========================================================
 # Load Main Dataset
@@ -16,7 +23,13 @@ def load_main_data():
     Load and preprocess the main unemployment dataset.
     """
 
-    df = pd.read_csv("data/Unemployment in India.csv")
+    file_path = DATA_DIR / "Unemployment in India.csv"
+
+    if not file_path.exists():
+        st.error(f"❌ Dataset not found:\n{file_path}")
+        st.stop()
+
+    df = pd.read_csv(file_path)
 
     # Remove extra spaces from column names
     df.columns = df.columns.str.strip()
@@ -45,7 +58,13 @@ def load_covid_data():
     Load and preprocess the COVID unemployment dataset.
     """
 
-    df = pd.read_csv("data/Unemployment_Rate_upto_11_2020.csv")
+    file_path = DATA_DIR / "Unemployment_Rate_upto_11_2020.csv"
+
+    if not file_path.exists():
+        st.error(f"❌ Dataset not found:\n{file_path}")
+        st.stop()
+
+    df = pd.read_csv(file_path)
 
     # Remove extra spaces
     df.columns = df.columns.str.strip()
@@ -73,14 +92,12 @@ def get_dataset_summary(df):
     Return summary statistics.
     """
 
-    summary = {
+    return {
         "Rows": df.shape[0],
         "Columns": df.shape[1],
-        "Missing Values": df.isnull().sum().sum(),
-        "Duplicate Rows": df.duplicated().sum()
+        "Missing Values": int(df.isnull().sum().sum()),
+        "Duplicate Rows": int(df.duplicated().sum())
     }
-
-    return summary
 
 
 # ==========================================================
@@ -107,4 +124,4 @@ def get_numeric_columns(df):
     Return numeric columns only.
     """
 
-    return df.select_dtypes(include=["number"]).columns.tolist()
+    return df.select_dtypes(include="number").columns.tolist()
