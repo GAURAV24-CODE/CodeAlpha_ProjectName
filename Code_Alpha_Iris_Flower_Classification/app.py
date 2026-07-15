@@ -370,7 +370,6 @@ elif page == "📊 Dataset":
             )
             heat_fig.update_layout(height=420)
             st.plotly_chart(heat_fig, use_container_width=True)
-
         with tab3:
             st.subheader("Column Names")
             st.write(list(df.columns))
@@ -381,7 +380,7 @@ elif page == "📊 Dataset":
             st.subheader("Data Types")
             st.dataframe(df.dtypes.astype(str).to_frame("Data Type"))
 
-   except FileNotFoundError as e:
+except FileNotFoundError as e:
     st.error(f"Error: {e}")
 # ==========================================================
 # ==========================================================
