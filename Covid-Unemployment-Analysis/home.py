@@ -1,14 +1,18 @@
-# ==========================================================
+# ============================================================
 # 📊 Unemployment Analysis Dashboard
-# CodeAlpha Data Science Internship
+# CodeAlpha Data Science Internship Project
 # Developed by: Gaurav Eknath Kumbhar
-# ==========================================================
+# ============================================================
 
 import streamlit as st
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
 
-# ----------------------------------------------------------
+# ============================================================
 # Page Configuration
-# ----------------------------------------------------------
+# ============================================================
+
 st.set_page_config(
     page_title="Unemployment Analysis Dashboard",
     page_icon="📊",
@@ -16,229 +20,173 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ==========================================================
-# Custom Sidebar Styling
-# ==========================================================
+# ============================================================
+# Sidebar
+# ============================================================
 
-st.markdown("""
-<style>
+st.sidebar.title("📌 Navigation")
 
-/* ---------------- Hide default page title (home/app) ---------------- */
-[data-testid="stSidebarNav"] > div:first-child{
-    display:none;
-}
-
-/* ---------------- Reduce top spacing ---------------- */
-.block-container{
-    padding-top:2rem;
-    padding-bottom:2rem;
-}
-
-/* ---------------- Sidebar width ---------------- */
-[data-testid="stSidebar"]{
-    min-width:280px;
-    max-width:280px;
-}
-
-/* ---------------- Sidebar navigation ---------------- */
-[data-testid="stSidebarNav"]{
-    padding-top:10px;
-}
-
-/* ---------------- Navigation links ---------------- */
-[data-testid="stSidebarNav"] a{
-    font-size:18px;
-    font-weight:500;
-    padding:10px 14px;
-    border-radius:10px;
-    margin-bottom:6px;
-}
-
-[data-testid="stSidebarNav"] a:hover{
-    background:#E8F0FE;
-}
-
-/* ---------------- Custom sidebar heading ---------------- */
-.sidebar-title{
-    font-size:24px;
-    font-weight:700;
-    text-align:center;
-    color:#1f77b4;
-    margin-bottom:15px;
-}
-
-.sidebar-footer{
-    text-align:center;
-    font-size:14px;
-    color:gray;
-    margin-top:30px;
-}
-
-</style>
-""", unsafe_allow_html=True)
-
-# Sidebar Header
-st.sidebar.markdown(
-    """
-<div class="sidebar-title">
-📊 Unemployment Dashboard
-</div>
-""",
-    unsafe_allow_html=True,
+page = st.sidebar.radio(
+    "Select Page",
+    [
+        "🏠 Home",
+        "📊 Dashboard",
+        "📂 Dataset Explorer",
+        "📈 Trend Analysis",
+        "🗺️ State Analysis",
+        "🦠 COVID Analysis",
+        "📌 Insights",
+        "ℹ️ About"
+    ]
 )
 
-st.sidebar.markdown("---")
+# ============================================================
+# HOME PAGE
+# ============================================================
 
-st.sidebar.markdown(
-"""
-### 👨‍💻 Developer
+if page == "🏠 Home":
 
-**Gaurav Eknath Kumbhar**
+    st.title("📊 Unemployment Analysis Dashboard")
 
-📚 MCA Student
-
-💼 CodeAlpha Intern
-
-📍 Maharashtra, India
-"""
-)
-
-st.sidebar.markdown("---")
-
-st.sidebar.markdown(
-"""
-<div class="sidebar-footer">
-Made with ❤️ using Streamlit
-</div>
-""",
-unsafe_allow_html=True
-)
-
-# ----------------------------------------------------------
-# Custom CSS
-# ----------------------------------------------------------
-
-def load_css():
-    try:
-        with open("assets/style.css") as f:
-            st.markdown(
-                f"<style>{f.read()}</style>",
-                unsafe_allow_html=True
-            )
-    except FileNotFoundError:
-        pass
-
-
-load_css()
-
-# ----------------------------------------------------------
-# Home Page
-# ----------------------------------------------------------
-
-st.title("📊 Unemployment Analysis Dashboard")
-
-st.markdown("""
+    st.markdown("""
 Welcome to the **Unemployment Analysis Dashboard**.
 
-This project analyzes unemployment trends across India using
-interactive visualizations built with **Python**, **Pandas**,
-**Plotly**, and **Streamlit**.
+This project was developed as part of the **CodeAlpha Data Science Internship**.
 
----
+The dashboard analyzes unemployment trends across India using interactive visualizations built with **Python, Plotly, and Streamlit**.
 
 ### 🎯 Project Objectives
 
 - Analyze unemployment trends
-- Compare state-wise unemployment
 - Study COVID-19 impact
 - Discover seasonal patterns
+- Compare state-wise unemployment
 - Generate business insights
-- Build an interactive dashboard
 """)
 
-# ----------------------------------------------------------
-# KPI Cards
-# ----------------------------------------------------------
+    st.markdown("---")
 
-col1, col2, col3, col4 = st.columns(4)
+    # ========================================================
+    # Information Cards
+    # ========================================================
 
-with col1:
-    st.metric("📁 Datasets", "2")
+    col1, col2, col3, col4 = st.columns(4)
 
-with col2:
-    st.metric("📊 Charts", "20+")
+    with col1:
+        st.metric(
+            "📁 Datasets",
+            "2"
+        )
 
-with col3:
-    st.metric("🗺️ States", "28+")
+    with col2:
+        st.metric(
+            "📊 Charts",
+            "20+"
+        )
 
-with col4:
-    st.metric("🦠 COVID Analysis", "Included")
+    with col3:
+        st.metric(
+            "🗺️ States",
+            "28+"
+        )
 
-st.divider()
+    with col4:
+        st.metric(
+            "🦠 COVID Analysis",
+            "Included"
+        )
 
-# ----------------------------------------------------------
-# Technologies
-# ----------------------------------------------------------
+    st.markdown("---")
 
-st.subheader("🛠 Technologies Used")
+    # ========================================================
+    # Technologies
+    # ========================================================
 
-tech1, tech2, tech3, tech4 = st.columns(4)
+    st.subheader("🛠️ Technologies Used")
 
-tech1.success("🐍 Python")
-tech2.info("📄 Pandas")
-tech3.warning("📊 Plotly")
-tech4.success("🚀 Streamlit")
+    tech1, tech2, tech3, tech4 = st.columns(4)
 
-st.divider()
+    tech1.success("🐍 Python")
+    tech2.info("📄 Pandas")
+    tech3.warning("📊 Plotly")
+    tech4.success("🚀 Streamlit")
 
-# ----------------------------------------------------------
-# Dashboard Features
-# ----------------------------------------------------------
+    st.markdown("---")
 
-left, right = st.columns(2)
+    # ========================================================
+    # Dashboard Features
+    # ========================================================
 
-with left:
-    st.markdown("""
-### 📌 Features
+    st.subheader("✨ Dashboard Features")
 
-- Interactive Dashboard
-- KPI Cards
-- State-wise Analysis
-- Monthly Trends
-- Dataset Explorer
-- COVID Analysis
+    feature1, feature2 = st.columns(2)
+
+    with feature1:
+
+        st.markdown("""
+✅ Interactive Dashboard
+
+✅ Dataset Explorer
+
+✅ Trend Analysis
+
+✅ State-wise Analysis
+
+✅ COVID-19 Analysis
+
+✅ Correlation Analysis
 """)
 
-with right:
-    st.markdown("""
-### ⭐ Highlights
+    with feature2:
 
-- Plotly Charts
-- Business Insights
-- Download Data
-- Responsive Layout
-- Portfolio Ready
-- Recruiter Friendly
+        st.markdown("""
+✅ Plotly Interactive Charts
+
+✅ KPI Cards
+
+✅ Business Insights
+
+✅ Download Ready
+
+✅ Recruiter Friendly
+
+✅ Streamlit Based
 """)
 
-st.divider()
+    st.markdown("---")
 
-st.info(
-    "👈 Use the sidebar to navigate through the different pages."
-)
+    st.success("👈 Use the sidebar to explore the dashboard.")
 
-st.caption("Developed by **Gaurav Eknath Kumbhar**")
+    st.caption("Developed by **Gaurav Eknath Kumbhar**")
 
+# ============================================================
+# PLACEHOLDER PAGES
+# ============================================================
 
+elif page == "📊 Dashboard":
+    st.title("📊 Dashboard")
+    st.info("Coming in the next step...")
 
+elif page == "📂 Dataset Explorer":
+    st.title("📂 Dataset Explorer")
+    st.info("Coming in the next step...")
 
+elif page == "📈 Trend Analysis":
+    st.title("📈 Trend Analysis")
+    st.info("Coming in the next step...")
 
+elif page == "🗺️ State Analysis":
+    st.title("🗺️ State Analysis")
+    st.info("Coming in the next step...")
 
+elif page == "🦠 COVID Analysis":
+    st.title("🦠 COVID Analysis")
+    st.info("Coming in the next step...")
 
-from utils.load_data import load_main_data
+elif page == "📌 Insights":
+    st.title("📌 Insights")
+    st.info("Coming in the next step...")
 
-df = load_main_data()
-
-st.write("Dataset Preview")
-
-st.dataframe(df.head())
+elif page == "ℹ️ About":
+    st.title("ℹ️ About")
+    st.info("Coming in the next step...")
