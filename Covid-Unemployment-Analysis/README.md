@@ -76,10 +76,10 @@ MCA Student
 CodeAlpha Data Science Intern
 
 GitHub:
-https://github.com/yourusername
+https://github.com/GAURAV24-CODE
 
 LinkedIn:
-https://linkedin.com/in/yourprofile
+https://www.linkedin.com/in/gaurav-kumbhar-0b4a39293
 
 ---
 =======
