@@ -481,7 +481,7 @@ The application demonstrates a complete machine learning workflow including:
         image_path = Path(__file__).parent / "assets" / "gaurav.png"
 
         if image_path.exists():
-            st.image(str(image_path), width=240)
+            st.image(str(image_path), width=350)
         else:
             st.info("📷 Add 'gaurav.png' inside the assets folder.")
 
