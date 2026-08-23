@@ -1,7 +1,7 @@
 # 🚀 CodeAlpha Data Science Internship Projects
 
 Welcome to my **CodeAlpha Data Science Internship** repository.
-
+Authors:--GAURAV EKNATH KUMBHAR
 This repository contains the projects I completed during my internship, demonstrating my skills in **Python, Data Analysis, Machine Learning, Data Visualization, and Web Application Development**.
 
 ---
