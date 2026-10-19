@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # 📊 Unemployment Analysis Dashboard
 
 An interactive Streamlit dashboard for analyzing unemployment trends in India.
