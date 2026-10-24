@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# 🌸 Iris Flower Classification | CodeAlpha Data Science Internship
+# 🌸 Iris Flower Classification | CodeAlpha Data Science Internshi
 
 ## 📌 Project Overview
 
