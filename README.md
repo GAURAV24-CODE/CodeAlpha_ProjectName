@@ -8,7 +8,7 @@ This repository contains the projects I completed during my internship, demonstr
 
 # 📂 Projects
 
-## 🌸 1. Iris Flower Classification
+## 🌸 1. Iris Flower Classificati
 
 ### 📌 Overview
 A Machine Learning project that predicts the species of an Iris flower using its physical measurements.
