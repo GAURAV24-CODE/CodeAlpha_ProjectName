@@ -9,7 +9,7 @@ Developed as part of the **CodeAlpha Data Science Internship**.
 
 ## 🚀 Features
 
-- 📊 Interactive Dashboard
+- 📊 Interactive Dashboa
 - 📂 Dataset Explorer
 - 📈 Trend Analysis
 - 🗺️ State-wise Analysis
