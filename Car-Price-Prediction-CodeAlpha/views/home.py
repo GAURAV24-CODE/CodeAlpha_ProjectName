@@ -385,7 +385,7 @@ including:
 
 🌐 **GitHub:** https://github.com/GAURAV24-CODE
 
-🔗 **LinkedIn:**https://www.linkedin.com/in/gaurav-kumbhar-0b4a39293?utm_source=share_via&utm_content=profile&utm_medium=member_android
+🔗 **LinkedIn:**https://www.linkedin.com/in/gauravkumbhar24
 """)
 
     st.markdown("<hr>", unsafe_allow_html=True)
