@@ -174,7 +174,7 @@ Model Evaluation
 
     linkedin_url = "https://linkedin.com/in/yourusername"
 
-    email = "your.email@gmail.com"
+    email = "kumbhargaurav@gmail.com"
 
     c1, c2, c3 = st.columns(3)
 
