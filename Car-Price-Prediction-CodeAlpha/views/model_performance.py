@@ -72,6 +72,11 @@ def render_model_performance():
     st.dataframe(summary, use_container_width=True, hide_index=True)
 
     st.subheader("⚠️ Limitations")
-    st.markdown("- Performance depends on the available training data.")
-- Vehicle condition and location are not represented by the saved feature set.
-- Market prices can change over time, so periodic retraining would improve long-term reliability.")
+    st.markdown("""
+### Important Notes
+
+- Performance depends on the available training data.
+- Market prices can change over time, so periodic retraining can improve the model.
+- Model metrics are calculated using the available test dataset.
+""")
+    
