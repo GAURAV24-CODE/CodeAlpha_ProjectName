@@ -1,607 +1,77 @@
-"""
-🤖 Model Performance page for the Car Price Prediction Streamlit app.
-"""
-
-import os
+"""Model performance page backed by the project's saved evaluation artifacts."""
+import joblib
 import numpy as np
 import pandas as pd
-import streamlit as st
 import plotly.express as px
-import plotly.graph_objects as go
-from PIL import Image
+import streamlit as st
 
-from utils import (
-    df, model, fuel_encoder, seller_encoder, transmission_encoder,
-    asset_path, model_resource_path,
-    PROJECT_NAME, AUTHOR, MODEL_NAME, DATASET_NAME, ROWS, COLS,
-    BASE_DIR, DATA_PATH, MODEL_PATH,
-)
+from utils import model, model_resource_path, MODEL_NAME
+
+
+def _load_artifact(name, default=None):
+    try:
+        return joblib.load(model_resource_path(name))
+    except Exception:
+        return default
 
 
 def render_model_performance():
+    metrics = _load_artifact("model_metrics.pkl", {}) or {}
+    training_info = _load_artifact("training_info.pkl", {}) or {}
+    y_test = np.asarray(_load_artifact("y_test.pkl", []))
+    y_pred = np.asarray(_load_artifact("y_pred.pkl", []))
+    feature_names = training_info.get("Features", [])
 
-    st.markdown("""
-    <div class="hero-container">
-        <h1>🤖 Model Performance Dashboard</h1>
-        <p>
-        Evaluate the performance of the trained Random Forest
-        Regression model using multiple evaluation metrics,
-        feature importance and visual analytics.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.title("🤖 Model Performance Dashboard")
+    st.caption("Metrics and charts below are generated from the project's saved model artifacts.")
 
-    st.write("")
-
-    # ------------------------------------------------------
-    # MODEL INFORMATION
-    # ------------------------------------------------------
-
-    left, right = st.columns([2,1])
-
-    with left:
-
-        st.subheader("📌 Model Overview")
-
-        st.write("""
-The application uses a **Random Forest Regressor**, an ensemble
-machine learning algorithm that combines multiple decision trees
-to produce accurate and robust predictions.
-
-Random Forest is well suited for regression problems because it
-
-• Captures non-linear relationships
-
-• Reduces overfitting
-
-• Handles noisy data
-
-• Provides Feature Importance
-
-• Produces stable predictions
-""")
-
-    with right:
-
-        st.subheader("⚙ Model Details")
-
-        st.info("""
-Algorithm
-
-Random Forest Regressor
-
-Library
-
-Scikit-Learn
-
-Task
-
-Regression
-
-Deployment
-
-Streamlit
-""")
-
-    st.divider()
-
-    # ------------------------------------------------------
-    # MODEL METRICS
-    # ------------------------------------------------------
+    st.subheader("📌 Model Overview")
+    st.info(f"**Algorithm:** {metrics.get('algorithm', MODEL_NAME)}  \n**Task:** Regression  \n**Library:** Scikit-learn  \n**Deployment:** Streamlit")
 
     st.subheader("📊 Evaluation Metrics")
-
-    # Replace these with your actual values
-    r2 = 0.96
-    mae = 0.63
-    rmse = 1.18
-    mse = rmse ** 2
-
+    r2 = float(metrics.get("r2", np.nan))
+    mae = float(metrics.get("mae", np.nan))
+    rmse = float(metrics.get("rmse", np.nan))
+    mse = float(metrics.get("mse", np.nan))
     c1, c2, c3, c4 = st.columns(4)
-
     c1.metric("R² Score", f"{r2:.3f}")
-    c2.metric("MAE", f"{mae:.2f}")
-    c3.metric("RMSE", f"{rmse:.2f}")
-    c4.metric("MSE", f"{mse:.2f}")
+    c2.metric("MAE", f"{mae:.3f}")
+    c3.metric("RMSE", f"{rmse:.3f}")
+    c4.metric("MSE", f"{mse:.3f}")
 
-    st.divider()
+    if np.isfinite(r2):
+        st.progress(max(0, min(100, int(r2 * 100))))
+        st.caption("R² indicates how much variation in the test target is explained by the model.")
 
-    # ------------------------------------------------------
-    # MODEL SCORE
-    # ------------------------------------------------------
+    if len(y_test) and len(y_test) == len(y_pred):
+        st.subheader("📈 Actual vs Predicted")
+        results = pd.DataFrame({"Actual Price": y_test, "Predicted Price": y_pred})
+        fig = px.scatter(results, x="Actual Price", y="Predicted Price", template="plotly_white")
+        low = float(min(results.min()))
+        high = float(max(results.max()))
+        fig.add_shape(type="line", x0=low, y0=low, x1=high, y1=high, line=dict(dash="dash"))
+        st.plotly_chart(fig, use_container_width=True)
 
-    st.subheader("🏆 Overall Performance")
+        st.subheader("📉 Residual Error Distribution")
+        residuals = results["Actual Price"] - results["Predicted Price"]
+        fig = px.histogram(x=residuals, nbins=20, template="plotly_white", labels={"x": "Residual Error"})
+        st.plotly_chart(fig, use_container_width=True)
 
-    score = int(r2 * 100)
-
-    st.progress(score)
-
-    st.metric(
-        "Model Accuracy",
-        f"{score}%"
-    )
-
-    if score >= 95:
-
-        st.success(
-            "Excellent predictive performance."
-        )
-
-    elif score >= 90:
-
-        st.info(
-            "Very good model with strong generalization."
-        )
-
+    st.subheader("⭐ Feature Importance")
+    importance = getattr(model, "feature_importances_", None)
+    if importance is not None:
+        names = feature_names or [f"Feature {i+1}" for i in range(len(importance))]
+        importance_df = pd.DataFrame({"Feature": names, "Importance": importance}).sort_values("Importance")
+        fig = px.bar(importance_df, x="Importance", y="Feature", orientation="h", template="plotly_white")
+        st.plotly_chart(fig, use_container_width=True)
     else:
-
-        st.warning(
-            "Model can be further improved."
-        )
-
-    st.divider()
-
-    # ------------------------------------------------------
-    # ACTUAL VS PREDICTED
-    # ------------------------------------------------------
-
-    st.subheader("📈 Actual vs Predicted")
-
-    np.random.seed(42)
-
-    actual = np.random.uniform(0,25,150)
-
-    predicted = actual + np.random.normal(0,1.2,150)
-
-    fig = px.scatter(
-
-        x=actual,
-
-        y=predicted,
-
-        labels={
-
-            "x":"Actual Price",
-
-            "y":"Predicted Price"
-
-        },
-
-        template="plotly_white"
-
-    )
-
-    fig.add_shape(
-
-        type="line",
-
-        x0=0,
-
-        y0=0,
-
-        x1=25,
-
-        y1=25,
-
-        line=dict(
-
-            dash="dash",
-
-            color="red"
-
-        )
-
-    )
-
-    fig.update_layout(height=600)
-
-    st.plotly_chart(
-
-        fig,
-
-        use_container_width=True
-
-    )
-
-    st.info(
-        "Points closer to the diagonal line indicate better prediction accuracy."
-    )
-
-    st.divider()
-
-    # ------------------------------------------------------
-    # RESIDUAL ERRORS
-    # ------------------------------------------------------
-
-    st.subheader("📉 Residual Error Distribution")
-
-    residual = actual - predicted
-
-    fig = px.histogram(
-
-        residual,
-
-        nbins=30,
-
-        template="plotly_white"
-
-    )
-
-    fig.update_layout(
-
-        height=450,
-
-        xaxis_title="Residual Error"
-
-    )
-
-    st.plotly_chart(
-
-        fig,
-
-        use_container_width=True
-
-    )
-
-    st.divider()
-
-    # ------------------------------------------------------
-    # NEXT:
-    # Part 6B
-    # Feature Importance + Pipeline + Summary
-    # ------------------------------------------------------
-
-    # ======================================================
-    # ⭐ PART 6B
-    # Premium Model Analytics
-    # ======================================================
-
-    st.markdown("## ⭐ Feature Importance")
-
-    # ------------------------------------------------------
-    # Feature Importance
-    # ------------------------------------------------------
-
-    feature_names = [
-        "Present Price",
-        "Driven Kms",
-        "Fuel Type",
-        "Seller Type",
-        "Transmission",
-        "Owner",
-        "Car Age"
-    ]
-
-    try:
-
-        importance = model.feature_importances_
-
-    except Exception:
-
-        importance = [
-            0.48,
-            0.17,
-            0.08,
-            0.05,
-            0.04,
-            0.03,
-            0.15
-        ]
-
-    importance_df = pd.DataFrame({
-
-        "Feature": feature_names,
-
-        "Importance": importance
-
-    })
-
-    importance_df = importance_df.sort_values(
-        by="Importance",
-        ascending=True
-    )
-
-    fig = px.bar(
-
-        importance_df,
-
-        x="Importance",
-
-        y="Feature",
-
-        orientation="h",
-
-        color="Importance",
-
-        text="Importance",
-
-        template="plotly_white"
-
-    )
-
-    fig.update_traces(
-        texttemplate="%{x:.2f}",
-        textposition="outside"
-    )
-
-    fig.update_layout(
-        height=450,
-        showlegend=False
-    )
-
-    st.plotly_chart(
-        fig,
-        use_container_width=True
-    )
-
-    st.divider()
-
-    # ------------------------------------------------------
-    # Machine Learning Pipeline
-    # ------------------------------------------------------
-
-    st.subheader("⚙ Machine Learning Pipeline")
-
-    st.code("""
-Raw Dataset
-      │
-      ▼
-Data Cleaning
-      │
-      ▼
-Feature Engineering
-      │
-      ▼
-Label Encoding
-      │
-      ▼
-Train-Test Split
-      │
-      ▼
-Random Forest Regressor
-      │
-      ▼
-Model Evaluation
-      │
-      ▼
-Streamlit Deployment
-""")
-
-    st.divider()
-
-    # ------------------------------------------------------
-    # Model Strengths
-    # ------------------------------------------------------
-
-    left, right = st.columns(2)
-
-    with left:
-
-        st.subheader("✅ Model Strengths")
-
-        st.success("""
-✔ High Prediction Accuracy
-
-✔ Robust Against Overfitting
-
-✔ Handles Non-linear Data
-
-✔ Stable Predictions
-
-✔ Fast Inference
-
-✔ Feature Importance Available
-
-✔ Easy Deployment
-""")
-
-    with right:
-
-        st.subheader("⚠ Limitations")
-
-        st.warning("""
-• Performance depends on training data.
-
-• Cannot predict unseen market trends.
-
-• Does not consider vehicle condition.
-
-• Does not include location-based pricing.
-
-• Future market fluctuations are ignored.
-""")
-
-    st.divider()
-
-    # ------------------------------------------------------
-    # Model Comparison
-    # ------------------------------------------------------
-
-    st.subheader("📊 Why Random Forest?")
-
-    comparison = pd.DataFrame({
-
-        "Algorithm":[
-            "Linear Regression",
-            "Decision Tree",
-            "Random Forest"
-        ],
-
-        "Accuracy":[
-            82,
-            90,
-            96
-        ]
-
-    })
-
-    fig = px.bar(
-
-        comparison,
-
-        x="Algorithm",
-
-        y="Accuracy",
-
-        color="Algorithm",
-
-        text="Accuracy",
-
-        template="plotly_white"
-
-    )
-
-    fig.update_traces(
-        texttemplate="%{y}%"
-    )
-
-    fig.update_layout(
-        height=450,
-        showlegend=False
-    )
-
-    st.plotly_chart(
-        fig,
-        use_container_width=True
-    )
-
-    st.divider()
-
-    # ------------------------------------------------------
-    # Improvement Suggestions
-    # ------------------------------------------------------
-
-    st.subheader("🚀 Future Improvements")
-
-    improvements = [
-
-        "Add XGBoost and LightGBM models",
-
-        "Hyperparameter tuning using GridSearchCV",
-
-        "Real-time market price integration",
-
-        "Vehicle image analysis",
-
-        "Location-based pricing",
-
-        "Web API deployment",
-
-        "Model retraining pipeline",
-
-        "Cloud deployment on Streamlit Cloud"
-
-    ]
-
-    for item in improvements:
-
-        st.info(f"• {item}")
-
-    st.divider()
-
-    # ------------------------------------------------------
-    # Performance Summary
-    # ------------------------------------------------------
-
-    st.subheader("📋 Model Summary")
-
-    summary = pd.DataFrame({
-
-        "Metric":[
-
-            "Algorithm",
-
-            "Prediction Type",
-
-            "Features Used",
-
-            "Evaluation Metric",
-
-            "Deployment",
-
-            "Programming Language"
-
-        ],
-
-        "Value":[
-
-            "Random Forest Regressor",
-
-            "Regression",
-
-            len(feature_names),
-
-            "R² Score",
-
-            "Streamlit",
-
-            "Python"
-
-        ]
-
-    })
-
-    st.dataframe(
-
-        summary,
-
-        hide_index=True,
-
-        use_container_width=True
-
-    )
-
-    st.divider()
-
-    # ------------------------------------------------------
-    # Download Model Report
-    # ------------------------------------------------------
-
-    report = summary.to_csv(index=False).encode("utf-8")
-
-    st.download_button(
-
-        "📥 Download Model Summary",
-
-        report,
-
-        "model_summary.csv",
-
-        "text/csv",
-
-        use_container_width=True
-
-    )
-
-    st.divider()
-
-    # ------------------------------------------------------
-    # Final Message
-    # ------------------------------------------------------
-
-    st.markdown("""
-
-<div class="prediction-card">
-
-<h2>🏆 Random Forest Regressor</h2>
-
-<p>
-
-The model demonstrates strong predictive performance
-for estimating used car prices using historical data.
-
-This dashboard provides transparency into the model's
-performance, feature importance, and evaluation metrics.
-
-</p>
-
-</div>
-
-""", unsafe_allow_html=True)
-
- 
-
-# ==========================================================
-# 📥 DOWNLOADS CENTER
-# ==========================================================
-
+        st.info("Feature importance is not available for the saved model.")
+
+    st.subheader("📋 Training Summary")
+    summary = pd.DataFrame({"Item": list(training_info.keys()), "Value": list(training_info.values())})
+    st.dataframe(summary, use_container_width=True, hide_index=True)
+
+    st.subheader("⚠️ Limitations")
+    st.markdown("- Performance depends on the available training data.
+- Vehicle condition and location are not represented by the saved feature set.
+- Market prices can change over time, so periodic retraining would improve long-term reliability.")
