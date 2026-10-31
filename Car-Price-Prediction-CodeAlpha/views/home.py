@@ -378,15 +378,10 @@ including:
 
 ---
 
-✅ Passionate about solving real-world problems using Machine Learning.
-
-✅ Skilled in Python, SQL, Power BI, Streamlit and Data Visualization.
-
-✅ Currently building AI & Data Science projects.
 
 ---
 
-📧 **Email:** kumbhargaurav24.com
+📧 **Email:** kumbhargaurav24@gmail.com
 
 🌐 **GitHub:** https://github.com/GAURAV24-CODE
 
