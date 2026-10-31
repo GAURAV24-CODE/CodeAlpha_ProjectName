@@ -121,7 +121,7 @@ PROJECT_NAME = "Car Price Prediction"
 
 AUTHOR = "Gaurav Eknath Kumbhar"
 
-MODEL_NAME = "Random Forest Regressor"
+MODEL_NAME = "Decision Tree Regressor"
 
 DATASET_NAME = "CarDekho Used Cars"
 
