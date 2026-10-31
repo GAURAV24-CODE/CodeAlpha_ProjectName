@@ -206,7 +206,7 @@ Encoding
 Train-Test Split
       │
       ▼
-Random Forest Model
+Decision tree Model
       │
       ▼
 Prediction
