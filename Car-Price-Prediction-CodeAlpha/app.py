@@ -78,7 +78,7 @@ with st.sidebar:
         """
         **Model**
 
-        Random Forest Regressor
+        Decision Tree Regressor
 
         **Dataset**
 
