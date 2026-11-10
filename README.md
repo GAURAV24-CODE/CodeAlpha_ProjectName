@@ -11,7 +11,7 @@ This repository contains the I completed during my internship, demonstrating my 
 ## 🌸 1. Iris Flower Classificati
 
 ### 📌 Overview
-A Machine Learning project that predicts the species of an Iris flower using its physical measurements.
+A Machine Learning project that predicts the species of an Iris flower using its physical 
 
 ### 🎯 Objectives
 - Analyze the Iris dataset
