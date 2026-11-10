@@ -8,7 +8,7 @@ Build a regression workflow that helps estimate used-car selling prices from ava
 
 ## 📊 Dataset
 
-The included CarDekho dataset contains **301 rows and 9 columns**. The saved training information records **299 processed samples**, **7 model features**, a **239/60 train-test split**, and the following features:
+The included CarDekho dataset contains **301 rows and 9 columns**. The saved training information records **299 processed samples**, **7 model features**, a **239/60 train-test split**, and the following
 
 - Present Price
 - Driven Kilometers
