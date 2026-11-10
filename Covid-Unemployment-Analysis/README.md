@@ -13,7 +13,7 @@ Developed as part of the **CodeAlpha Data Science Internship**.
 - 📂 Dataset Explorer
 - 📈 Trend Analysis
 - 🗺️ State-wise Analysis
-- 🦠 COVID-19 Impact Analysis
+- 🦠 COVID-19 I
 - 💡 Business Insights
 - 📥 Download Reports
 - 🎨 Professional UI
