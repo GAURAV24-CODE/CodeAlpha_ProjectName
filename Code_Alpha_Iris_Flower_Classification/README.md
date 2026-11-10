@@ -11,7 +11,7 @@ The Iris dataset is one of the most popular datasets for learning and demonstrat
 
 ## 🎯 Objective
 
-Develop a classification model that predicts the species of an Iris flower using the following features:
+Develop a classification model that predicts the species of an Iris flower using the following
 
 * Sepal Length
 * Sepal Width
