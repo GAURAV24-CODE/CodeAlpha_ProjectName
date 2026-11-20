@@ -3,7 +3,7 @@
 
 An interactive Streamlit dashboard for analyzing unemployment trends in India.
 
-Developed as part of the **CodeAlpha Data Science Internship**.
+Developed as part of the **CodeAlpha Data Science 
 
 ---
 
