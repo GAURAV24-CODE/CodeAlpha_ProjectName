@@ -4,7 +4,7 @@ An end-to-end machine learning project for estimating the selling price of used 
 
 ## 🎯 Project Objective
 
-Build a regression workflow that helps estimate used-car selling prices from available vehicle information.
+Build a regression workflow that helps estimate used-car selling prices from available vehicle 
 
 ## 📊 Dataset
 
