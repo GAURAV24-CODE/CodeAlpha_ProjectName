@@ -40,7 +40,7 @@ The saved project artifacts identify the deployed model as a **Decision Tree Reg
 - Actual vs. predicted visualization using saved test results
 - Residual error analysis
 - Feature-importance visualization
-- Downloadable project resources
+- Downloadable resources 
 
 ## 🛠️ Technology Stack
 
