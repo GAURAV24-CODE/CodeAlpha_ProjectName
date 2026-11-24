@@ -3,7 +3,7 @@
 
 ## 📌 Project Overview
 
-This project is developed as part of the **CodeAlpha Data Science Internship**. The objective is to build a Machine Learning model that accurately classifies Iris flowers into one of three species based on their physical .
+This project is developed as part **CodeAlpha Data Science Internship**. The objective is to build a Machine Learning model that accurately classifies Iris flowers into one of three species based on their physical .
 
 The Iris dataset is one of the most popular datasets for learning and demonstrating classification algorithms in Machine Learning.
 
