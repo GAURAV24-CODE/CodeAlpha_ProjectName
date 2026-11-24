@@ -2,7 +2,7 @@
 
 Welcome to my **CodeAlpha Data Science Internship** repository.
 Authors:--GAURAV EKNATH KUMBHAR
-This repository contains the I completed during my internship, demonstrating my **Python, Data Analysis, Machine Learning, Data Visualization, and Web Application Developmen
+This repository contains the I completed during my internship, demonstrating my **Python, Data Analysis, Machine Learning, Data Visualization, and Web Application Development and testing 
 
 ---
 
